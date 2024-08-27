@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Home Page</title>
+ 
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+
+    <style>
+    
+        /* CSS styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fff;
+            color: #333;
+        }
+
+        header {
+            background-color: #fffff;
+            padding: 20px;
+            text-align: center;
+        }
+
+ 
+
+        nav {
+            color: orange;
+            text-decoration: none;
+        }
+
+        .flash-ad-container {
+            overflow: hidden;
+            width: 100%;
+            border-radius: 2%;
+        }
+
+        .flash-ad {
+            display: flex;
+            animation: slide 6s infinite;
+        }
+
+        .flash-ad img {
+            width: 100%;
+            flex-shrink: 0;
+        }
+
+        @keyframes slide {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(0); }
+            33.33% { transform: translateX(-100%); }
+            58.33% { transform: translateX(-100%); }
+            66.66% { transform: translateX(-200%); }
+            91.66% { transform: translateX(-200%); }
+            100% { transform: translateX(0); }
+        }
+
+        .menu {
+          border-color: orange;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .menu-category {
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 40px;
+            border: 10px;
+            border-color: orange;
+        }
+
+        .menu-category h3 {
+            color: #ff8c00;
+            font-size: 24px;
+            margin-bottom: 10px;
+            border-color: orange;
+            text-align: center;
+            border: 10px;
+        }
+
+        .dish-container {
+            display: flex;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding-bottom: 10px;
+            
+        }
+
+        .dish-block {
+            flex: 0 0 calc(50% - 10px);
+            margin-right: 20px;
+            display: flex;
+            align-items: center;
+            transition: transform 0.3s;
+            transform-style: preserve-3d;
+        }
+
+        .dish-block:hover {
+            transform: rotateY(20deg);
+        }
+
+        .dish-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 0%;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .dish-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .dish-details {
+            flex-grow: 1;
+            padding-left: 20px;
+        }
+
+        .dish-name {
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .dish-price {
+            color: #ff8c00;
+            font-size: 16px;
+        }
+
+        .dish-square {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 20px;
+        }
+
+        .dish-square .dish-block {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .dish-square .dish-image {
+            margin: 0 auto 10px;
+        }
+
+        footer {
+            background-color: darkorange;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+            .heading-bar {
+      background-color: #ffffff;
+      color: black;
+      height: 70px;
+      margin: -17px 3px;
+      text-align: center;
+      font-size: 15px;
+      padding: 0px 5px;
+    }
+    .order-button {
+  background-color: #ff8c00;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 15px;
+  transition: background-color 0.3s;
+}
+    .preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    .preloader.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .preloader .loader {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .preloader .loader i {
+      font-size: 3rem;
+      color: darkorange;
+      animation: ii 0.8s linear infinite;
+    }
+
+    .preloader .loader h2 {
+      margin-top: 1rem;
+      color: yellow;
+       
+    }
+        @keyframes ii {
+      0% { transform: scale(1); }
+      20% { transform: scale(1.2); }
+      40% { transform: scale(1.4); }
+      60% { transform: scale(1.4); }
+      80% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+.order-button:hover {
+  background-color: black ;
+}
+    .menu-lines {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 22px;
+            cursor: pointer;
+        }
+
+        .menu-line {
+            width: 25px;
+            height: 3px;
+            background-color: darkorange;
+            border-radius: 2px;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-lines.open .menu-line:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .menu-lines.open .menu-line:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-lines.open .menu-line:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+
+         .slider-dots {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .slider-dots .slider-dot {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      background-color: #bbb;
+      border-radius: 50%;
+      margin: 0 5px;
+      cursor: pointer;
+    }
+
+    .slider-dot.active {
+      background-color: #FA8A00;
+    }
+
+           @media (min-width: 769px) {
+.flash-ad-container {
+            overflow: hidden;
+            width: 90%;
+            margin: 0 auto;
+     
+            border-radius: 5px;
+        }
+
+        .flash-ad img {
+             width:100%;
+          height: 500px;
+          border-radius: 0px;
+            flex-shrink: 0;
+        }
+        .heading-bar h1{
+          font-size: 40px;
+        }
+          .dish-image {
+            width: 290px;
+            height: 290px;
+            border-radius: 0%;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .dish-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .dish-details {
+            flex-grow: 1;
+            padding-left: 20px;
+        }
+
+        .dish-name {
+            font-weight: bold;
+            font-size: 25px;
+            margin-bottom: 5px;
+        }
+
+        .dish-price {
+            color: #ff8c00;
+            font-size: 30px;
+        }
+
+  .menu-category h3 {
+            color: #ff8c00;
+            font-size: 44px;
+            margin-bottom: 10px;
+            border-color: orange;
+            text-align: center;
+            border: 10px;
+        }
+            .order-button {
+  background-color: #ff8c00;
+  color: #fff;
+  border: none;
+  margin-top: 30px;  
+  padding: 10px 20px;
+  font-size: 20px;
+  cursor: pointer;
+  border-radius: 55px;
+  transition: background-color 0.3s;
+}
+      }
+      
+      
+      
+    </style>
+    
+</head>
+<body>
+  <div class="heading-bar">
+    <a href="foodzyai.html">
+<i class="fas fa-robot" style="color: darkorange; font-size: 28px; position: absolute; top: 3.4%; right: 20px; transform: translateY(-50%);"></i>
+</a>
+
+<h1 style="color: darkorange; font-family: 'Montserrat', sans-serif;">Foodzy</h1>
+        <div class="menu-lines">
+            <div class="menu-line"></div>
+            <div class="menu-line"></div>
+            <div class="menu-line"></div>
+            
+        </div>
+
+
+
+  </div>
+  <div class="preloader">
+    <div class="loader">
+      <i id="loading-icon" class="fas fa-utensils"></i>
+      <h3>Foodzy</h3>
+    </div>
+  </div>
+
+    <main>
+        <section class="flash-ad-container">
+            <div class="flash-ad">
+                 <img src="d1.jpg" alt="Advertisement 1">
+                 <img src="d2.png" alt="Advertisement 1">
+                <img src="d4.jpg" alt="Advertisement 1">
+                <img src="d4.jpg" alt="Advertisement 2">
+                <img src="d4.jpg" alt="Advertisement 3">
+
+            </div>
+              
+        </section>
+<section class="menu">
+  <div class="menu-category">
+    <h3>Appetizers</h3>
+    <div class="dish-container">
+      <div class="dish-block">
+        <div class="dish-image">
+          <img src="r.png" alt="Bruschetta">
+        </div>
+        <div class="dish-details">
+          <span class="dish-name">Bruschetta</span>
+          <br>
+          <span class="dish-price">₹149</span>
+          <button class="order-button" onclick="window.location.href='preview.html';">Order</button>
+        </div>
+      </div>
+      <div class="dish-block">
+        <div class="dish-image">
+          <img src="y.png" alt="Spinach Artichoke Dip">
+        </div>
+        <div class="dish-details">
+          <span class="dish-name">Spinach Artichoke</span>
+          <br>
+          <span class="dish-price">₹199</span>
+          <button class="order-button" onclick="window.location.href='order_link_here';">Order</button>
+          
+          
+        </div>
+        
+      </div>
+      <div class="dish-block">
+        <div class="dish-image">
+          <img src="r2.png" alt="Burger">
+        </div>
+        <div class="dish-details">
+          <span class="dish-name">Burger</span>
+          <br>
+          <span class="dish-price">₹249</span>
+          <button class="order-button" onclick="window.location.href='order_link_here';">Order</button>
+        </div>
+      </div>
+      <div class="dish-block">
+        <div class="dish-image">
+          <img src="r3.png" alt="Lemon Burger">
+        </div>
+        <div class="dish-details">
+          <span class="dish-name">Lemon Burger</span>
+          <br>
+          <span class="dish-price">₹249</span>
+          <button class="order-button" onclick="window.location.href='order_link_here';">Order</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="menu-category">
+    <h3>Main Course</h3>
+    <div class="dish-container">
+      <div class="dish-block">
+        <div class="dish-image">
+          <img src="z.png" alt="Grilled Burgers">
+        </div>
+        <div class="dish-details">
+          <span class="dish-name">Grilled Burgers</span>
+          <br>
+          <span class="dish-price">₹499</span>
+          <button class="order-button" onclick="window.location.href='order_link_here';">Order</button>
+        </div>
+      </div>
+      <div class="dish-block">
+        <div class="dish-image">
+          <img src="r5.png" alt="Noodles">
+        </div>
+        <div class="dish-details">
+          <span class="dish-name">Noodles</span>
+          <br>
+          <span class="dish-price">₹599</span>
+          <button class="order-button" onclick="window.location.href='order_link_here';">Order</button>
+        </div>
+      </div>
+      <div class="dish-block">
+        <div class="dish-image">
+          <img src="r4.png" alt="Ribeye Steak">
+        </div>
+        <div class="dish-details">
+          <span class="dish-name">Ribeye Steak</span>
+          <br>
+          <span class="dish-price">₹599</span>
+          <button class="order-button" onclick="window.location.href='order_link_here';">Order</button>
+        </div>
+      </div>
+      <div class="dish-block">
+        <div class="dish-image">
+          <img src="r6.png" alt="Ice Cream">
+        </div>
+        <div class="dish-details">
+          <span class="dish-name">Ice Cream</span>
+          <br>
+          <span class="dish-price">₹99</span>
+          <button class="order-button" onclick="window.location.href='order_link_here';">Order</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="color:darkorange; text-align:center; font-size: 28px;"><b>Special 99₹</b></h3>
+  <div class="dish-square">
+    <div class="dish-block">
+      <div class="dish-image">
+        <img src="pizza.png" alt="Pizza">
+      </div>
+      <div class="dish-details">
+        <span class="dish-name">Pizza</span>
+        <br>
+        <span class="dish-price">₹99</span>
+        <button class="order-button" onclick="window.location.href='order_link_here';">Order</button>
+      </div>
+    </div>
+    <div class="dish-block">
+      <div class="dish-image">
+        <img src="r7.png" alt="Spicy Cream">
+      </div>
+      <div class="dish-details">
+        <span class="dish-name">Spicy Cream</span>
+        <br>
+        <span class="dish-price">₹99</span>
+        <button class="order-button" onclick="window.location.href='order_link_here';">Order</button>
+      </div>
+    </div>
+    <div class="dish-block">
+      <div class="dish-image">
+        <img src="r11.png" alt="Veg Burger">
+      </div>
+      <div class="dish-details">
+        <span class="dish-name">Veg Burger</span>
+        <br>
+        <span class="dish-price">₹99</span>
+        <button class="order-button" onclick="window.location.href='order_link_here';">Order</button>
+      </div>
+    </div>
+    <div class="dish-block">
+      <div class="dish-image">
+        <img src="r10.png" alt="Chilly Paneer">
+      </div>
+      <div class="dish-details">
+        <span class="dish-name">Chilly Paneer</span>
+        <br>
+        <span class="dish-price">₹99</span>
+        <button class="order-button" onclick="window.location.href='order_link_here';">Order</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+  </div>
+</section>
+
+</section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Foodzy. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // JavaScript for sliding flash advertisement
+                var icons = ["fa-utensils", "fa-coffee", "fa-hamburger", "fa-pizza-slice", "fa-cocktail"]; // List of icons to cycle through
+    var currentIndx = 0;
+
+    setInterval(function() {
+      var icon = document.getElementById('loading-icon');
+      icon.classList.remove(icons[currentIndx]);
+      currentIndx = (currentIndex + 1) % icons.length;
+      icon.classList.add(icons[currentIndx]);
+    }, 800); 
+    
+    const flashAdImages = document.querySelectorAll('.flash-ad img');
+        let currentIndex = 1;
+
+        function showNextImage() {
+            flashAdImages[currentIndex].style.display = 'none';
+            currentIndex = (currentIndex + 1) % flashAdImages.length;
+            flashAdImages[currentIndex].style.display = 'block';
+        }
+
+        setInterval(showNextImage, 900000); // Change image every 4 seconds
+    var icons = ["fa-utensils", "fa-coffee", "fa-hamburger", "fa-pizza-slice", "fa-cocktail"]; // List of icons to cycle through
+    var currentInex = 0;
+
+    setInterval(function() {
+      var icon = document.getElementById('loading-icon');
+      icon.classList.remove(icons[currentInex]);
+      currentInex = (currentInex + 1) % icons.length;
+      icon.classList.add(icons[currentInex]);
+    }, 800); // Change the interval time as needed
+    window.addEventListener('load', function() {
+      var preloader = document.querySelector('.preloader');
+      preloader.classList.add('hidden');
+    });
+    
+    
+    //image assets 
+document.addEventListener('DOMContentLoaded', function() {
+  const images = document.getElementsByTagName('img');
+  const assetPath = '/assets/';
+
+  for (let img of images) {
+    const src = img.getAttribute('src');
+    if (!src.startsWith('http') && !src.startsWith('data:') && !src.startsWith(assetPath)) {
+      img.src = assetPath + src;
+    }
+  }
+});
+    </script>
+</body>
+</html>

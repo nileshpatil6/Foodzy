@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="description" content="Explore the secrets of Mahabharata and Vedic science through a scientific lens. Discover the ancient scriptures and gain insights into spiritual wisdom.">
+  <meta name="description" content="1. Discover the power of Vedic Science with our Ai chatbot, providing insights and knowledge on various topics in scientific way">
+    <meta name="description" content="Experience the wonders of Vedic Science with our Ai chatbot, your virtual companion for exploring ancient wisdom and modern applications">
+      <meta name="description" content="Enhance your understanding of Vedic Science through our Ai chatbot, offering valuable information and guidance.">
+    
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Mahabharata</title>
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  html, body {
+    height: 100%;
+  }
+  
+  #chat-window {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  } 
+.title-bar {
+    background: #fc4a1a; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #f7b733, #fc4a1a); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #f7b733, #fc4a1a); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    text-align: center;
+    padding: 12px 0;
+  }
+
+  .title {
+ font-family: 'Georgia', serif;
+
+
+
+
+    font-weight: bold;
+    font-size: 1.5em;
+    color: white;
+    margin: 0;
+  }
+
+
+ #chat-container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 52px 16px;
+  overflow-y: auto;
+  max-height: 650px;
+}
+
+  .sent-message {
+    align-self: flex-end;
+    background: #2193b0; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #6dd5ed, #2193b0); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #6dd5ed, #2193b0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    color: white;
+    border-radius: 20px;
+    max-width: 80%;
+    padding: 12px 16px;
+    margin-bottom: 10px;
+    animation: pop 0.3s ease-in-out;
+      
+  }
+  
+ .received-message {
+  align-self: flex-start;
+  background: #fc4a1a; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #f7b733, #fc4a1a); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #f7b733, #fc4a1a); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  color: black;
+  border-radius: 20px;
+  max-width: 90%;
+  padding: 12px 16px;
+  margin-bottom: 10px; /* Updated margin-bottom */
+  animation: pop 0.3s ease-in-out;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+  white-space: pre-wrap; 
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  font-size: 17px;
+}
+
+  
+  @keyframes pop {
+    0% {
+      transform: scale(0);
+      opacity: 0;
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  
+  #chat-input {
+    display: flex;
+    padding: 8px;
+    align-items: center;
+    background-color: transperant;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 0;
+  }
+#chat-input textarea::placeholder {
+  font-size: 17px; /* Set your desired font size */
+  text-align: center;
+  line-height: 14px; /* Match the height of your textarea */
+}
+
+#chat-input textarea {
+  width: calc(100% - 22px);
+  height: 48px; /* Initial height */
+  min-height: 48px; /* Minimum height */
+  max-height: 160px;
+  padding: 13px;
+  border: 2px solid darkorange;
+  border-radius: 25px;
+  background-color: white;
+  margin-right: 8px;
+  margin-top: 8px;
+  
+  resize: none; /* Disable textarea resizing */
+  overflow-y: auto; /* Hide vertical scrollbar */
+  word-wrap: break-word; /* Break long words and wrap onto the next line */
+  font-size: 17px;
+}
+#chat-input textarea:focus {
+  outline: none;
+}
+
+
+.copy-icon {
+  margin-left: 10px;
+  cursor: pointer;
+}
+#send-button {
+background-color: #1DA1F2;
+color: white;
+border: none;
+border-radius: 30px;
+padding: 13px 16px;
+margin-bottom: -4px;
+font-weight: bold;
+cursor: pointer;
+font-size: 16px;
+transition: background-color 0.2s ease-in-out;
+}
+
+#send-button:hover {
+background-color: #0C8FC1;
+}
+
+#send-button:active {
+background-color: #0A6E91;
+}
+
+:root {
+--bg-color: #F8F8F8;
+--text-color: #333333;
+}
+
+body.dark-mode {
+      background-color: black;
+      color: white;
+      }
+
+body {
+background-color: var(--bg-color);
+color: var(--text-color);
+}
+
+/* Other CSS styles */
+
+
+.toggle-btn {
+position: fixed;
+  top: 16px;
+right: 16px;
+z-index: 2;
+}
+
+.switch {
+  visibility: hidden;
+}
+
+.label {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50px;
+  height: 25px;
+  border-radius: 40px;
+  background-color: #fff;
+  cursor: pointer;
+  text-align: left;
+  user-select: none;
+  transition: background-color 0.3s ease;
+}
+
+.label .fas {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: #f1c40f;
+  transition: transform 0.3s ease;
+}
+
+.label .fas.fa-sun {
+  left: 5px;
+}
+
+.label .fas.fa-moon {
+  right: 5px;
+}
+
+.ball {
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  transform: translate(-5px, -50%);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #FC860B;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.switch:checked ~ .label {
+  background-color: #000000;
+  
+}
+
+.switch:checked ~ .label .fas.fa-sun {
+  transform: translateY(0%) translateX(10%);
+  opacity: 0;
+}
+
+.switch:checked ~ .label .fas.fa-moon {
+  transform: translateY(-5%) translateX(-10%);
+}
+
+.switch:checked ~ .label .ball {
+  transform: translate(calc(50px - 25px), -50%);
+}
+.res {
+  align-self: center;
+  background: #fc4a1a;
+  background: -webkit-linear-gradient(to right, #f7b733, #fc4a1a);
+  background: linear-gradient(to right, #f7b733, #fc4a1a);
+  color: black;
+  border-radius: 20px;
+  max-width: 80%;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  
+  animation: pop 0.3s ease-in-out;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+  text-align: center;
+}
+.container {
+text-align: center;
+}
+
+.tite { 
+font-size: 2.2em;
+margin-top: 0.71em;
+margin-bottom: 0.5em;
+}
+
+.subtitle {
+font-size: 1.2em;
+margin-top: 0;
+margin-bottom: 2em;
+}
+
+#typing-indicator {
+  display: none;
+  justify-content: left;
+  align-items: center;
+  margin-bottom: 90px;
+  
+}
+
+.dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fc4a1a; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #f7b733, #fc4a1a); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #f7b733, #fc4a1a); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  margin-right: 6px;
+  animation-name: typing;
+  animation-duration: 0.6s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes typing {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+/* Style for the back button */
+.back-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  background-color: #fff;
+  font-size: 50px;
+  
+}
+
+.back-button:hover {
+  background-color: #eee;
+}
+
+/* Style for the arrow icon */
+.fa-arrow-left {
+  font-size: 90px;
+}
+    
+  
+  
+</style>
+</head>
+<body>
+  <div id="chat-window">
+    <div class="title-bar">
+      <h1 class="title"><a href="https://vedicscience.in"><img src="/back.png" width="30" height="30" style="float: left; margin-right: -80px;"></a>Customer support</h1>
+      <div class="pop-up-bubble">
+        <div class="toggle-btn">
+          <input type="checkbox" id="switch" name="theme" class="switch" />
+          <label for="switch" class="label">
+            <i class="fas fa-sun"></i>
+            <i class="fas fa-moon"></i>
+            <div class="ball"></div>
+          </label>
+        </div>
+      </div>
+    </div>
+<div class="container">
+      <h2 class="tite">Foodzy Ai</h2>
+      <h2 class="subtitle">Ask your queries, Submit your issues. <br> Foodzy with Ai customer support</h2>
+    </div>
+    <div id="1" class="res" style="margin-top: 1px;">
+      How can I track my food delivery order?
+    </div>
+    
+    <div id="2" class="res">
+      What should I do if I receive the wrong order?
+    </div>
+    
+    <div id="3" class="res">
+      How can I update my delivery address after placing an order?
+    </div>
+    <div id="typing-indicator">
+      <div class="dot"> </div>
+      <div class="dot"> </div>
+      <div class="dot"> </div>
+    </div>
+    
+    <div id="chat-output"></div>
+    
+    <div id="chat-container"></div>
+    <div id="chat-input">
+      <textarea placeholder="Pose your Query here...."></textarea>
+      <input type="file" id="fileInput" multiple>
+      <button id="send-button">send</button>
+    </div>
+  </div>
+  
+  <script type="importmap">
+    {
+      "imports": {
+        "@google/generative-ai": "https://esm.run/@google/generative-ai"
+      }
+    }
+  </script>
+<script type="module">
+  import { GoogleGenerativeAI } from "@google/generative-ai";
+
+  const API_KEY = "AIzaSyCrbeU4QGZYHXR2AIAfeiko5AN8NCerQ24"; // Replace with your actual API key
+  const genAI = new GoogleGenerativeAI(API_KEY);
+
+  
+  const typingIndicator = document.getElementById('typing-indicator');
+  const sendButton = document.getElementById('send-button');
+  const chatContainer = document.getElementById('chat-container');
+  const input = document.querySelector('#chat-input textarea');
+  const fileInput = document.getElementById('fileInput');
+  const bubbles = document.querySelectorAll('.res');
+  const container = document.querySelector(".container");
+  const switchButton = document.getElementById("switch");
+  const body = document.body;
+  let i = 0;
+  let chatHistory = [
+      {
+        role: "user",
+        parts: [
+          {text: "Hi"},
+        ],
+      },
+      {
+        role: "model",
+        parts: [
+          {text: "Hi! What can I do for you today? \n"},
+        ],
+      },
+      
+            {
+              role: "user",
+              parts: [
+                { text: "From now your a ai powered customer support chatbot you need to help and provide support. you also need to verify the images whether they are same ad like user is saying." },
+              ],
+            },
+            
+    ]
+  
+  bubbles.forEach(bubble => {
+    bubble.addEventListener('click', () => {
+      setTimeout(showTypingIndicator, 700);
+
+      const messageText = bubble.textContent;
+      addSentMessage(messageText);
+
+      hideBubblesAndContainer();
+      let userPrompt = messageText;
+    });
+  });
+
+  async function run() {
+    try {
+      const model = await genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
+
+      sendButton.addEventListener("click", async function () {
+const userPrompt = { text: input.value.trim() };
+        input.value = "";
+
+        hideBubblesAndContainer();
+        showTypingIndicator();
+
+        let receivedMessage = document.createElement('div');
+        receivedMessage.className = 'received-message';
+
+        const imageParts = await Promise.all(
+          [...fileInput.files].map(fileToGenerativePart)
+        );
+
+        const chat = model.startChat({
+            history: chatHistory,
+            generationConfig: {
+              maxOutputTokens: 5000000,
+              temperature: 0.2,
+              topK: 2,
+            },
+                     safety_settings:
+        {
+            "category": "HARM_CATEGORY_HARASSMENT",
+            "threshold": "BLOCK_NONE",
+            "probability":"negligible",
+               "category": "HARM_CATEGORY_HATE_SPEECH",
+               "threshold": "BLOCK_NONE",
+                   "probability":"negligible",
+                  "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+               "threshold": "BLOCK_NONE",
+                   "probability":"negligible",
+                  "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
+                  "threshold": "BLOCK_NONE",
+                      "probability":"negligible",
+                     "category": "HARM_CATEGORY_HATE_SPEECH",
+                     "threshold": "BLOCK_NONE",
+                         "probability":"negligible",
+               
+        },
+          });
+          
+          
+
+          
+          
+          
+
+                  for await (const chunk of (await chat.sendMessageStream([userPrompt, ...imageParts])).stream) {
+            // ...
+          
+  const chunkText = chunk.text();
+  await displayReceivedMessage(receivedMessage, chunkText);
+  
+  
+  chatHistory.push({ role: "user", parts: [userPrompt, ...imageParts] });
+chatHistory.push({ role: "model", parts: [{ text: chunkText }] });
+}
+         
+      });
+
+      bubbles.forEach(bubble => {
+        bubble.addEventListener('click', async () => {
+          const userPrompt = { text: bubble.textContent };
+          hideBubblesAndContainer();
+          showTypingIndicator();
+          let receivedMessage = document.createElement('div');
+          receivedMessage.className = 'received-message';
+
+          const imageParts = await Promise.all(
+            [...fileInput.files].map(fileToGenerativePart)
+          );
+
+          const chat = model.startChat({
+            history: chatHistory,
+            generationConfig: {
+              maxOutputTokens: 5000000,
+              temperature: 0.2,
+              topK: 2,
+            },
+            safety_settings: {
+              // ... (your existing safety settings)
+            },
+          });
+
+          for await (const chunk of (await chat.sendMessageStream([userPrompt, ...imageParts])).stream) {
+            const chunkText = chunk.text();
+            await displayReceivedMessage(receivedMessage, chunkText);
+            chatHistory.push({ role: "user", parts: [userPrompt, ...imageParts] });
+            chatHistory.push({ role: "model", parts: chunkText });
+          }
+       
+        });
+      });
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  }
+
+  // Converts a File object to a GoogleGenerativeAI.Part object.
+  async function fileToGenerativePart(file) {
+    const base64EncodedDataPromise = new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onloadend = () => resolve(reader.result.split(',')[1]);
+      reader.readAsDataURL(file);
+    });
+    return {
+      inlineData: { data: await base64EncodedDataPromise, mimeType: file.type },
+    };
+  }
+
+  function hideBubblesAndContainer() {
+    bubbles.forEach(otherBubble => {
+      otherBubble.style.display = 'none';
+    });
+    container.style.display = "none";
+  }
+
+  function showTypingIndicator() {
+    typingIndicator.style.display = 'flex';
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+    chatContainer.addEventListener("scroll", handleScroll);
+    i = 0;
+  }
+
+  function hideTypingIndicator() {
+    typingIndicator.style.display = 'none';
+    chatContainer.removeEventListener("scroll", handleScroll);
+  }
+
+  function handleScroll() {
+    const isAtBottom = chatContainer.scrollHeight - chatContainer.scrollTop === chatContainer.clientHeight;
+  }
+
+  let stopAutoScroll = false;
+  let lastScrollPosition = chatContainer.scrollTop;
+  chatContainer.addEventListener("scroll", () => {
+    if (chatContainer.scrollTop < lastScrollPosition) {
+      stopAutoScroll = true;
+    } else {
+      stopAutoScroll = false;
+    }
+
+    lastScrollPosition = chatContainer.scrollTop;
+  });
+
+  async function displayReceivedMessage(receivedMessage, message) {
+    const words = message.split(" ");
+
+    if (i === 0) {
+      chatContainer.appendChild(receivedMessage);
+      i = 1;
+    }
+
+    for (const word of words) {
+      
+      receivedMessage.innerHTML += `${formatText(word)} `;
+
+      hideTypingIndicator();
+      if (!stopAutoScroll) {
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+      }
+      await new Promise(resolve => setTimeout(resolve, 22));
+    }
+    sendButton.disabled = false;
+  }
+
+  const textarea = document.querySelector('#chat-input textarea');
+  const initialHeight = '48px';
+
+  textarea.addEventListener('input', function () {
+    this.style.height = 'auto';
+    this.style.height = (this.scrollHeight) + 'px';
+  });
+
+  // Reset the height when the textarea is empty
+  textarea.addEventListener('input', function () {
+    if (!this.value.trim()) {
+      this.style.height = initialHeight;
+    }
+  });
+
+  // Initialize the height on page load
+  textarea.style.height = initialHeight;
+
+  switchButton.addEventListener("change", function () {
+    if (this.checked) {
+      body.classList.add("dark-mode");
+    } else {
+      body.classList.remove("dark-mode");
+    }
+  });
+
+  sendButton.addEventListener('click', () => {
+    const message = input.value.trim();
+    if (message) {
+      addSentMessage(message);
+      hideBubblesAndContainer();
+    }
+    textarea.style.height = initialHeight;
+  });
+
+    function formatText(text) {
+  // Replace * **text** * with bold HTML tags
+  text = text.replace(/\* \*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+  // Replace * ***text*** * with stronger bold HTML tags
+  text = text.replace(/\* \*\*\*(.*?)\*\*\* \*/g, '<strong style="font-weight: bold;">$1</strong>');
+
+  // Replace ```code``` with code formatting
+  
+text = text.replace(/\*\*/g, '<h3>');
+return text;
+}
+
+  function addSentMessage(message) {
+    const sentMessage = document.createElement('div');
+    sentMessage.className = 'sent-message';
+    sentMessage.textContent = message;
+    chatContainer.appendChild(sentMessage);
+    chatContainer.appendChild(typingIndicator);
+    sendButton.disabled = true;
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+    setTimeout(showTypingIndicator, 700);
+  }
+
+  i = 0;
+
+  run();
+</script>
+
+</body>
+</html>

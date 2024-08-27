@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dish Preview - Foodzy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+        /* CSS styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fff;
+            color: #333;
+        }
+
+        header {
+            background-color: #fffff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav {
+            color: orange;
+            text-decoration: none;
+        }
+
+        .dish-preview-container {
+  
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            border: 2px solid orange;
+        }
+
+        .dish-image {
+            width: 50%;
+          margin-top: -23%;
+
+            border-radius: 10px;
+        }
+
+        .dish-info {
+ 
+            text-align: center;
+        }
+
+        .dish-info h2 {
+
+            color: #ff8c00;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .dish-info p {
+              margin-top:-8%;
+            font-size: 23px;
+            margin-bottom: 10px;
+            color: #333;
+            text-align: left;
+     
+        }
+
+        .dish-price {
+            font-size: 22px;
+            color: #333;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .order-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #ff8c00;
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .order-button:hover {
+            background-color: #e07b00;
+        }
+
+        .recommendations {
+            margin-top: 30px;
+        }
+
+        .recommendations h3 {
+            color: #ff8c00;
+            font-size: 24px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .recommendations ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .recommendations ul li {
+            margin: 10px;
+            text-align: center;
+        }
+
+        .recommendations img {
+            width: 150px;
+            height: 150px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+
+        footer {
+            background-color: darkorange;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .heading-bar {
+            background-color: #ffffff;
+            color: black;
+            height: 70px;
+            margin: -17px 3px;
+            text-align: center;
+            font-size: 15px;
+            padding: 0px 5px;
+            position: relative;
+        }
+
+        .heading-bar h1 {
+            color: darkorange;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .menu-lines {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 22px;
+            cursor: pointer;
+        }
+
+        .menu-line {
+            width: 25px;
+            height: 3px;
+            background-color: darkorange;
+            border-radius: 2px;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-lines.open .menu-line:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .menu-lines.open .menu-line:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-lines.open .menu-line:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .preloader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .preloader .loader {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .preloader .loader i {
+            font-size: 3rem;
+            color: darkorange;
+            animation: ii 0.8s linear infinite;
+        }
+
+        .preloader .loader h2 {
+            margin-top: 1rem;
+            color: yellow;
+        }
+
+        @keyframes ii {
+            0% { transform: scale(1); }
+            20% { transform: scale(1.2); }
+            40% { transform: scale(1.4); }
+            60% { transform: scale(1.4); }
+            80% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        @media (min-width: 769px) {
+            .heading-bar h1 {
+                font-size: 40px;
+            }
+
+            .dish-info h2 {
+                font-size: 40px;
+            }
+
+            .dish-info p,
+            .dish-price {
+                font-size: 20px;
+            }
+
+            .recommendations h3 {
+                font-size: 32px;
+            }
+
+            .recommendations img {
+                width: 200px;
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="heading-bar">
+        <i class="fas fa-search" style="color: darkorange; font-size: 28px; position: absolute; top: 3.4%; right: 20px; transform: translateY(-50%);"></i>
+        <h1>Foodzy</h1>
+        <div class="menu-lines">
+            <div class="menu-line"></div>
+            <div class="menu-line"></div>
+            <div class="menu-line"></div>
+        </div>
+    </div>
+
+    <div class="preloader">
+        <div class="loader">
+            <i id="loading-icon" class="fas fa-utensils"></i>
+            <h3>Foodzy</h3>
+        </div>
+    </div>
+
+    <main>
+    <div class="dish-preview-container">
+          <div class="dish-info">
+          <h2>Bruschetta</h2>
+        <img src="r.png" alt="Bruschetta" class="dish-image">
+      
+          
+            <p>Delicious toasted bread topped with fresh tomatoes, garlic, basil, and olive oil. Perfect as a starter or a light meal.</p>
+            <div class="dish-price">149₹</div>
+            <a href="order.html" class="order-button">Order Now</a>
+        </div>
+        <div class="recommendations">
+            <h3>Other Recommendations</h3>
+            <ul>
+                <li>
+                    <img src="y.png" alt="Spinach Artichoke Dip">
+                    <p>Spinach Artichoke Dip</p>
+                    <p>99₹</p>
+                </li>
+                <li>
+                    <img src="r2.png" alt="Burger">
+                    <p>Burger</p>
+                    <p>199₹</p>
+                </li>
+                <li>
+                    <img src="r3.png" alt="Lemon Burger">
+                    <p>Lemon Burger</p>
+                    <p>179₹</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</main>
+
+
+    <footer>
+        <p>&copy; 2024 Foodzy. All rights reserved.</p>
+    </footer>
+
+    <script>
+        var icons = ["fa-utensils", "fa-coffee", "fa-hamburger", "fa-pizza-slice", "fa-cocktail"];
+        var currentInex = 0;
+
+        function changeIcon() {
+            var loadingIcon = document.getElementById("loading-icon");
+            loadingIcon.classList.remove(icons[currentInex]);
+            currentInex = (currentInex + 1) % icons.length;
+            loadingIcon.classList.add(icons[currentInex]);
+        }
+
+        setInterval(changeIcon, 1000);
+
+        window.addEventListener("load", function() {
+            var preloader = document.querySelector(".preloader");
+            preloader.classList.add("hidden");
+        });
+
+        var menuLines = document.querySelector(".menu-lines");
+        menuLines.addEventListener("click", function() {
+            menuLines.classList.toggle("open");
+        });
+        
+        
+        document.addEventListener('DOMContentLoaded', function() {
+          const images = document.getElementsByTagName('img');
+          const assetPath = '/assets/';
+        
+          for (let img of images) {
+            const src = img.getAttribute('src');
+            if (!src.startsWith('http') && !src.startsWith('data:') && !src.startsWith(assetPath)) {
+              img.src = assetPath + src;
+            }
+          }
+        });
+    </script>
+</body>
+</html>
+    
