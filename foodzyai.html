@@ -682,18 +682,18 @@ async function processBotResponse(message) {
     const { plainText, codeText } = splitBotMessage(botMessage);
 
     const dishes = [
-          { name: 'Bruschetta', price: '₹149', img: 'r.png' },
+          { name: 'Bruschetta', price: '₹149', img: 'assets/r.png' },
           { name: 'Spinach Artichoke Dip', price: '₹199', img: 'tastee.png' },
-          { name: 'Burger', price: '₹249', img: 'r2.png' },
-          { name: 'Lemon Burger', price: '₹249', img: 'r3.png' },
-          { name: 'Grilled Burgers', price: '₹499', img: 'z.png' },
-          { name: 'Noodles', price: '₹599', img: 'r5.png' },
-          { name: 'Ribeye Steak', price: '₹599', img: 'r4.png' },
-          { name: 'Ice Cream', price: '₹99', img: 'r6.png' },
-          { name: 'Pizza', price: '₹99', img: 'pizza.png' },
-          { name: 'Spicy Cream', price: '₹99', img: 'r7.png' },
-          { name: 'Veg Burger', price: '₹99', img: 'r11.png' },
-          { name: 'Chilly Paneer', price: '₹99', img: 'r10.png' }
+          { name: 'Burger', price: '₹249', img: 'assets/r2.png' },
+          { name: 'Lemon Burger', price: '₹249', img: 'assets/r3.png' },
+          { name: 'Grilled Burgers', price: '₹499', img: 'assets/z.png' },
+          { name: 'Noodles', price: '₹599', img: 'assets/r5.png' },
+          { name: 'Ribeye Steak', price: '₹599', img: 'assets/r4.png' },
+          { name: 'Ice Cream', price: '₹99', img: 'assets/r6.png' },
+          { name: 'Pizza', price: '₹99', img: 'assets/pizza.png' },
+          { name: 'Spicy Cream', price: '₹99', img: 'assets/r7.png' },
+          { name: 'Veg Burger', price: '₹99', img: 'assets/r11.png' },
+          { name: 'Chilly Paneer', price: '₹99', img: 'assets/r10.png' }
         ];
 
     const dish = dishes.find(d => plainText.toLowerCase().includes(d.name.toLowerCase()));
