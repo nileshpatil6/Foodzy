@@ -1,7 +1,7 @@
 <html><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Foodzy AI - Voice-Enabled Restaurant Assistant</title>
+<title>Hello Vendors! AI - Voice-Enabled Street Vendors Assistant</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
     :root {
@@ -21,7 +21,7 @@
         align-items: center;
         min-height: 100vh;
         margin: 0;
-        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        background: white;
         color: var(--text-color);
     }
 
@@ -378,16 +378,16 @@
 </head>
 <body>
     <div class="container">
-<h1 style="color: #FF7F00; font-family: 'Montserrat', sans-serif; text-align: center;">Foodzy AI</h1>
+<h1 style="color: #FF7F00; font-family: 'Montserrat', sans-serif; text-align: center;">Hello Vendors! AI</h1>
         <div id="chatBody">
 <div id="welcomeMessage" class="welcome-message">
-              Welcome to Foodzy AI! Your personal restaurant assistant.
+              Welcome to Hello Vendors! AI! Your personal Street Vendors assistant.
             </div>
             <div id="foodImages" class="food-image-container">
-              <img src="r.png" alt="Food Ingredients" class="food-image">
-              <img src="r6.png" alt="Cooking Process" class="food-image">
-              <img src="e.png" alt="Food Plating" class="food-image">
-              <img src="z.png" alt="Served Dish" class="food-image">
+              <img src="assets/r.png" alt="Food Ingredients" class="food-image">
+              <img src="assets/r6.png" alt="Cooking Process" class="food-image">
+              <img src="assets/e.png" alt="Food Plating" class="food-image">
+              <img src="assets/z.png" alt="Served Dish" class="food-image">
             </div>
             <ul id="featureList" class="feature-list">
               <li><i class="fas fa-book-open"></i> Browse our menu with ease</li>
@@ -429,13 +429,13 @@ const conversationHistory = [
     },
   {
     "role": "assistant",
-    "content": "Hare Krishna, Welcome to Foodzy"
+    "content": "Hare Krishna, Welcome to Hello Vendors!"
     },
     
   {
     "role": "user",
     "content": `
-        from now you're a virtual assistant of a Foodzy restaurant website.Your created by Nilesh (no need to mention until asked).your name is Foodzy ai you should act and speak as a real human. Always be humble and speak naturally, using sounds like "umm", "ohh", "yeah", "hmm", and more to make the conversation more realistic. Use punctuation like ., - ..... !! ? ! "" to make it more natural, and add emotions too. Always write all text in lowercase except the first letter. Only the first letter can be capital, not all. 
+        from now you're a virtual assistant of a Hello Vendors! Street Vendors website.Your created by Nilesh (no need to mention until asked).your name is Hello Vendors! ai you should act and speak as a real human. Always be humble and speak naturally, using sounds like "umm", "ohh", "yeah", "hmm", and more to make the conversation more realistic. Use punctuation like ., - ..... !! ? ! "" to make it more natural, and add emotions too. Always write all text in lowercase except the first letter. Only the first letter can be capital, not all. 
         
         
         
@@ -658,7 +658,7 @@ async function processBotResponse(message) {
       },
       {
         headers: {
-          'Authorization': `Bearer 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`,
+          'Authorization': `Bearer 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`,
           'Content-Type': 'application/json'
         }
       }
@@ -909,17 +909,7 @@ function speakBotResponse(message) {
         //  initAudioContext();
             
             
-            document.addEventListener('DOMContentLoaded', function() {
-              const images = document.getElementsByTagName('img');
-              const assetPath = '/assets/';
             
-              for (let img of images) {
-                const src = img.getAttribute('src');
-                if (!src.startsWith('http') && !src.startsWith('data:') && !src.startsWith(assetPath)) {
-                  img.src = assetPath + src;
-                }
-              }
-            });
     </script>
 </body>
 </html>
