@@ -651,14 +651,14 @@ async function processBotResponse(message) {
       'https://api.groq.com/openai/v1/chat/completions',
       {
         messages: conversationHistory,
-        model: 'llama-3.1-70b-versatile',
+        model: 'llama-3.3-70b-specdec',
         temperature: 0.5,
         max_tokens: 1024,
         top_p: 1
       },
       {
         headers: {
-          'Authorization': `Bearer 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`,
+          'Authorization': `Bearer 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`,
           'Content-Type': 'application/json'
         }
       }
@@ -759,7 +759,7 @@ function speakBotResponse(message) {
     thirdAudioBuffer = null;
 
     const url = "https://api.deepgram.com/v1/speak?model=aura-orpheus-en";
-    const apiKey = "b8b1401237d2eb28d132caf61ef487cd52e0eb78";
+    const apiKey = "62ae2614cd6041de2341b88a54ed50a2ec009a92";
     const headers = {
         Authorization: `Token ${apiKey}`,
         "Content-Type": "application/json"
